@@ -734,7 +734,8 @@
 // fix errors that base on Alexsander Akers from http://stackoverflow.com/a/5998683/2613194
 - (NSString*) mimeTypeForFileAtPath: (NSString *) path {
     if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
-        return nil;
+        // return nil; // Avoid errors setting nil *** -[__NSDictionaryM setObject:forKey:]: object cannot be nil (key: type)
+        return @"application/octet-stream";
     }
     
     CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (__bridge CFStringRef)[path pathExtension], NULL);
